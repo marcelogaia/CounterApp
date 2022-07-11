@@ -1,5 +1,5 @@
 import './App.css';
-import { useReducer } from 'react';
+import { useReducer, useEffect } from 'react';
 import { AppContext } from './context/AppContext';
 import { counterReducer } from './reducer/counter-reducer';
 import { v4 as uuid } from 'uuid';
@@ -16,8 +16,13 @@ export default function App() {
 }
 
 export const CounterProvider = ({ children }) => {
-	const [ data, dispatchData ] = useReducer(counterReducer, { [uuid()]: newGroupMetadata });
-	return <AppContext.Provider value={{ data, dispatchData }}> {children} </AppContext.Provider>;
+
+	const groupMetadata = JSON.parse(localStorage.getItem('groupMetadata'))
+	const [data, dispatchData] = useReducer(counterReducer, groupMetadata ?? { [uuid()]: newGroupMetadata });
+
+	useEffect(() => { localStorage.setItem('groupMetadata', JSON.stringify(data)); }, [data]);
+
+	return <AppContext.Provider value={ { data, dispatchData } }> { children } </AppContext.Provider>;
 };
 
 export const newCounterMetadata = { value: 0, label: 'New Counter' };
