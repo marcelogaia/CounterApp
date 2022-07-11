@@ -11,10 +11,22 @@ const Header = () => {
 	const handleAddNewGroup = () => {
 		dispatchData({ type: 'ADD_GROUP', payload: { groupId: uuid(), newGroup: newGroupMetadata } });
 	};
+
+	const handleClearLists = () => {
+		if (window.confirm('Are you sure you want clear the whole list?')) {
+			dispatchData({ type: 'CLEAR', payload: {} })
+		}
+	}
 	return (
 		<header className="bg-primary px-3">
 			<div className="text-light d-flex justify-content-start align-items-center ">
 				<h3 className="p-2 mx-5">Counter</h3>
+				<button
+					onClick={ handleClearLists }
+					className="add-new-counter btn btn-sm bg-light text-primary border px-3 mr-3"
+				>
+					Clear
+				</button>
 				{/* <button
 					onClick={handleAddNewGroup}
 					className="add-new-counter btn btn-sm bg-light text-primary border px-3 mr-3"

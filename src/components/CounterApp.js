@@ -7,7 +7,7 @@ const CounterApp = () => {
 	const { data } = useContext(AppContext);
 	return (
 		<div>
-			{/* <Header /> */ }
+			<Header />
 			<div className="main-container">
 				{ Object.keys(data).map(groupId => (
 					<CounterGroup key={ groupId } groupId={ groupId } group={ data[groupId] } />

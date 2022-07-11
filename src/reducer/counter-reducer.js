@@ -50,6 +50,11 @@ export const counterReducer = (state, action) => {
 		case 'ADD_COUNTER':
 			state[groupId].counters[action.payload.id] = action.payload.newCounter;
 			return { ...state };
+		case 'CLEAR':
+			// todo: Remove this and implement a proper clean cycle (without reloading the page :joy: ).
+			localStorage.removeItem('groupMetadata')
+			window.location.reload();
+			return;
 		default:
 			return state;
 	}
