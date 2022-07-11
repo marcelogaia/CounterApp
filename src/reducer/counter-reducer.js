@@ -10,6 +10,8 @@ export const counterReducer = (state, action) => {
 			return { ...state, [groupId]: handleCounterGroupState(counterGroup, action.type, action.payload) };
 		case 'LABEL':
 			return { ...state, [groupId]: handleCounterGroupState(counterGroup, action.type, action.payload) };
+		case 'DELETE':
+			return { ...state, [groupId]: handleCounterGroupState(counterGroup, action.type, action.payload) };
 		case 'ALLOW_NEGATIVE_VALUE':
 			return {
 				...state,
@@ -66,15 +68,28 @@ const handleCounterState = (actionType, payload, counterState) => {
 	if (actionType === 'LABEL') {
 		return { ...counterState, label: payload.label };
 	}
+	if (actionType === 'DELETE') {
+		return { ...counterState, id: payload.id };
+	}
 };
 
 const handleCounterGroupState = (group, actionType, payload) => {
+	let counters = group.counters;
 	const previousCounterState = group.counters[payload.id];
 	const newCounterState = handleCounterState(actionType, payload, previousCounterState);
+
+	if (actionType === 'DELETE') {
+		if (newCounterState.id && counters.hasOwnProperty(newCounterState.id)) {
+			delete counters[payload.id];
+			group.counters = counters;
+		}
+		return { ...group };
+	}
+
 	return {
 		...group,
 		counters: {
-			...group.counters,
+			...counters,
 			[payload.id]: newCounterState
 		}
 	};

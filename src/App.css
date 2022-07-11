@@ -25,6 +25,10 @@ button, input {
     width: 170;
 }
 
+.label-field {
+    width: calc( 100% - 30px );
+}
+
 .options-section {
     width: 100px;
 }
@@ -53,6 +57,17 @@ button, input {
     font-size: 2rem;
     color: #305aa3;
     font-weight: 100;
+}
+
+.Counter button.close {
+    width: 30px;
+    height: 30px;
+    font-size: 1rem;
+}
+
+.Counter .flex {
+    display: flex;
+    align-items: center;
 }
 
 .value {

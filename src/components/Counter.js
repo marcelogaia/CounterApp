@@ -1,6 +1,6 @@
 import { useContext, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAngleRight, faAngleLeft } from '@fortawesome/free-solid-svg-icons';
+import { faAngleRight, faAngleLeft, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 import { AppContext } from '../context/AppContext';
 
 const Counter = ({ id, options, counter }) => {
@@ -20,6 +20,10 @@ const Counter = ({ id, options, counter }) => {
 		dispatchData({ type: 'LABEL', payload: { groupId, id, label } });
 	};
 
+	const handleDelete = () => {
+		dispatchData({ type: 'DELETE', payload: { groupId, id } })
+	}
+
 	useEffect(
 		() => {
 			if (!negativeValueAllowed) {
@@ -28,26 +32,30 @@ const Counter = ({ id, options, counter }) => {
 
 			if (value > limit) dispatchData({ type: 'RESET_VALUE', payload: { groupId, id, value: limit } });
 		},
-		[ value, negativeValueAllowed, groupId, id, dispatchData, limit ]
+		[value, negativeValueAllowed, groupId, id, dispatchData, limit]
 	);
 
 	return (
 		<div className="Counter border-top border-primary mx-auto shadow my-2">
-			<div className="mb-1">
+			<div className="mb-1 flex">
 				<input
 					className="label-field"
 					type="text"
-					value={label}
-					onChange={e => handleSetLabel(e.target.value)}
+					value={ label }
+					onChange={ e => handleSetLabel(e.target.value) }
+					onFocus={ e => e.target.select() }
 				/>
+				<button onClick={ handleDelete } className="close">
+					<FontAwesomeIcon icon={ faTimesCircle } size="md" />
+				</button>
 			</div>
 			<div className="d-flex justify-content-between">
-				<button onClick={handleSubtract}>
-					<FontAwesomeIcon icon={faAngleLeft} />
+				<button onClick={ handleSubtract }>
+					<FontAwesomeIcon icon={ faAngleLeft } />
 				</button>
-				<div className="value"> {value} </div>
-				<button onClick={handleAdd}>
-					<FontAwesomeIcon icon={faAngleRight} />
+				<div className="value"> { value } </div>
+				<button onClick={ handleAdd }>
+					<FontAwesomeIcon icon={ faAngleRight } />
 				</button>
 			</div>
 		</div>
