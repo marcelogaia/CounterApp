@@ -15,12 +15,12 @@ const Header = () => {
 		<header className="bg-primary px-3">
 			<div className="text-light d-flex justify-content-start align-items-center ">
 				<h3 className="p-2 mx-5">Counter</h3>
-				<button
+				{/* <button
 					onClick={handleAddNewGroup}
 					className="add-new-counter btn btn-sm bg-light text-primary border px-3 mr-3"
 				>
 					<FontAwesomeIcon icon={faPlusCircle} />
-				</button>
+				</button> */}
 			</div>
 		</header>
 	);

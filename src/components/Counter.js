@@ -46,7 +46,7 @@ const Counter = ({ id, options, counter }) => {
 					onFocus={ e => e.target.select() }
 				/>
 				<button onClick={ handleDelete } className="close">
-					<FontAwesomeIcon icon={ faTimesCircle } size="md" />
+					<FontAwesomeIcon icon={ faTimesCircle } size="lg" />
 				</button>
 			</div>
 			<div className="d-flex justify-content-between">

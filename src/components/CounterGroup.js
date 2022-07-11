@@ -33,27 +33,27 @@ const CounterGroup = ({ groupId, group }) => {
 					<input
 						type="text"
 						className="fw-bold"
-						value={label}
-						onChange={e => handleGroupLabel(e.target.value)}
+						value={ label }
+						onChange={ e => handleGroupLabel(e.target.value) }
 					/>
 				</div>
 				<div className="d-flex justify-content-around align-items-center options-section">
-					<button onClick={handleAddNewCounter} className="add-new-counter btn btn-sm border">
-						<FontAwesomeIcon icon={faPlusCircle} />
+					<button onClick={ handleAddNewCounter } className="add-new-counter btn btn-sm border">
+						<FontAwesomeIcon icon={ faPlusCircle } size="lg" />
 					</button>
-					<div className="dropdown dropend">
+					{/* <div className="dropdown dropend backoff">
 						<div className="options-icon " id="optionsMenu" data-bs-toggle="dropdown" aria-expanded="false">
-							<FontAwesomeIcon icon={faEllipsisV} />
+							<FontAwesomeIcon icon={ faEllipsisV } />
 						</div>
 						<div className="dropdown-menu px-2" aria-labelledby="optionsMenu">
-							<CounterOptions options={counterOptions} />
+							<CounterOptions options={ counterOptions } />
 						</div>
-					</div>
+					</div> */}
 				</div>
 			</div>
-			{Object.keys(group.counters).map(counterId => (
-				<Counter key={counterId} id={counterId} options={counterOptions} counter={group.counters[counterId]} />
-			))}
+			{ Object.keys(group.counters).map(counterId => (
+				<Counter key={ counterId } id={ counterId } options={ counterOptions } counter={ group.counters[counterId] } />
+			)) }
 		</div>
 	);
 };
